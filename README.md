@@ -48,4 +48,10 @@ Expected outcome
 4. To retrieve information from sqlite3 db in json format, visit (http://127.0.0.1:5000/Trial) in your browser. Here, it is built to retrieve the first row from the vitals table (from app.db)
 
 
+Viewing Dashboard
+-----------------
+1. Visit http://127.0.0.1:5000/index (To view the team of fire-fighters and incoming SOS Notifications)
+
+2. On clicking on any of the fire-fighter's names, it will display their entire vitals-chart.
+
 
