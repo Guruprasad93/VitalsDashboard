@@ -1,0 +1,187 @@
+<html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+</head>
+<body>
+<center><h2>{{name}} Vitals Stats</h2></center>
+    <div id="bloodoxy-container" style="width:100%; height:400px;">
+        
+    </div>
+    <!--<div id="heartrate-container" style="width:100%; height:400px;">
+        
+    </div>    -->
+    <div id="tempint-container" style="width:100%; height:400px;">
+        
+    </div>    
+    <div id="tempext-container" style="width:100%; height:400px;">
+        
+    </div>    
+
+    <script type="text/javascript">
+        $(function () {
+            var bloodoxy=[];
+            var heartrate=[];
+            var tempint=[];
+            var tempext=[];
+            var timestamp=[];
+            {% for vital in vitalsJSON['vitals'] %}
+                bloodoxy.push({{vital['bloodoxy']}})
+                heartrate.push({{vital['heartrate']}})
+                tempint.push({{vital['tempinternal']}})
+                tempext.push({{vital['tempexternal']}})
+                var timeArr = '{{vital['timestamp']|safe}}'.split('T')
+                timestamp.push(timeArr[1])
+            {% endfor %}
+
+    $('#bloodoxy-container').highcharts({
+        title: {
+            text: 'Blood Oxygen Level',
+            x: -20 //center
+        },
+        subtitle: {
+            text: '',
+            x: -20
+        },
+        xAxis: {
+            categories: timestamp
+        },
+        yAxis: {
+            title: {
+                text: 'SpO2'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '°C'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: '{{name}}',
+            data: bloodoxy
+        }]
+    });
+
+    $('#heartrate-container').highcharts({
+        title: {
+            text: 'Heart Rate',
+            x: -20 //center
+        },
+        subtitle: {
+            text: '',
+            x: -20
+        },
+        xAxis: {
+            categories: timestamp
+        },
+        yAxis: {
+            title: {
+                text: 'Beats Per Minute (BPM)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '°C'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: '{{name}}',
+            data: heartrate
+        }]
+    }); 
+
+    $('#tempint-container').highcharts({
+        title: {
+            text: 'Internal Temperature',
+            x: -20 //center
+        },
+        subtitle: {
+            text: '',
+            x: -20
+        },
+        xAxis: {
+            categories: timestamp
+        },
+        yAxis: {
+            title: {
+                text: 'Temperature (°F)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '°C'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: '{{name}}',
+            data: tempint
+        }]
+    });    
+    $('#tempext-container').highcharts({
+        title: {
+            text: 'External Temperature',
+            x: -20 //center
+        },
+        subtitle: {
+            text: '',
+            x: -20
+        },
+        xAxis: {
+            categories: timestamp
+        },
+        yAxis: {
+            title: {
+                text: 'Temperature (°C)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '°C'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: '{{name}}',
+            data: tempext
+        }]
+    });      
+});
+
+    </script>    
+</body>
+</html>

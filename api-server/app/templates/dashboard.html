@@ -1,0 +1,20 @@
+<html>
+<head>
+<<<<<<< HEAD
+</head>
+<body>
+   <ul>
+     {% for user in usersJSON['users'] %}
+       <li><a href="http://localhost:5000/api/{{user['id']}}/vitals">{{user['id']}},{{user['nickname']}}</a></li>
+     {% endfor %}
+   </ul>
+
+   <ul>
+     {% for sos in sosJSON['sos'] %}
+       <li>{{sos['id']}},{{sos['sostxt']}},{{sos['timestamp']}}</li>
+     {% endfor %}
+   </ul>
+
+</body>
+</html>
+

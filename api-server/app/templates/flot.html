@@ -1,0 +1,310 @@
+{% extends "layoutDash.html" %}
+
+{% block content %}
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <center><h1 class="page-header">{{ user.nickname }} Vitals Statistics</h1></center>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Blood Oxygen Level
+                        </div>
+                        
+
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            
+                                <div id="bloodoxy-container" style="width:100%; height:400px;"></div>     
+                          
+                        </div>
+                       
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+ 
+
+
+
+                <!-- /.col-lg-12 -->
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Heart Rate (BPM)
+                        </div>
+                   
+                        <div class="panel-body">
+                           <div id="heartrate-container" style="width:100%; height:400px;"></div> 
+                        </div>
+         
+                    </div>
+       
+                </div>
+                
+
+
+
+
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Internal Temperature
+                        </div>
+        
+                        <div class="panel-body">
+                           <div id="tempint-container" style="width:100%; height:400px;"></div> 
+                        </div>
+          
+                    </div>
+   
+                </div>
+
+                
+
+
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            External Temperature
+                        </div>
+   
+                        <div class="panel-body">
+                           <div id="tempext-container" style="width:100%; height:400px;"></div> 
+                        </div>
+     
+                    </div>
+ 
+                </div>
+
+                <!--<div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Bar Chart Example
+                        </div>
+    
+                        <div class="panel-body">
+                            <div class="flot-chart">
+                                <div class="flot-chart-content" id="flot-bar-chart"></div>
+                            </div>
+                        </div>
+    
+                    </div>
+
+                </div>-->
+
+            </div>
+        </div>   
+
+
+    <script type="text/javascript">
+        $(function () {
+            var bloodoxy=[];
+            var heartrate=[];
+            var tempint=[];
+            var tempext=[];
+            var timestamp=[];
+            {% for vital in vitalsJSON['vitals'] %}
+                bloodoxy.push({{vital['bloodoxy']}})
+                heartrate.push({{vital['heartrate']}})
+                tempint.push({{vital['tempinternal']}})
+                tempext.push({{vital['tempexternal']}})
+                var timeArr = '{{vital['timestamp']|safe}}'.split('T')
+                timestamp.push(timeArr[1])
+            {% endfor %}
+
+    
+    chart = new Highcharts.Chart({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            renderTo: 'bloodoxy-container'
+                },
+    
+        title: {
+            text: 'Blood Oxygen Level',
+            x: -20 //center
+        },
+        subtitle: {
+            text: '',
+            x: -20
+        },
+        xAxis: {
+            categories: timestamp
+        },
+        yAxis: {
+            title: {
+                text: 'SpO2'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '°C'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: '{{ user.nickname }}',
+            data: bloodoxy
+        }]
+    });
+
+
+
+    chart = new Highcharts.Chart({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            renderTo: 'heartrate-container'
+                },
+        title: {
+            text: 'Heart Rate',
+            x: -20 //center
+        },
+        subtitle: {
+            text: '',
+            x: -20
+        },
+        xAxis: {
+            categories: timestamp
+        },
+        yAxis: {
+            title: {
+                text: 'Beats Per Minute (BPM)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '°C'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: '{{ user.nickname }}',
+            data: heartrate
+        }]
+    }); 
+
+    
+    chart = new Highcharts.Chart({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            renderTo: 'tempint-container'
+                },
+
+        title: {
+            text: 'Internal Temperature',
+            x: -20 //center
+        },
+        subtitle: {
+            text: '',
+            x: -20
+        },
+        xAxis: {
+            categories: timestamp
+        },
+        yAxis: {
+            title: {
+                text: 'Temperature (°F)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '°C'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: '{{ user.nickname }}',
+            data: tempint
+        }]
+    });  
+
+
+    chart = new Highcharts.Chart({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            renderTo: 'tempext-container'
+                },
+        title: {
+            text: 'External Temperature',
+            x: -20 //center
+        },
+        subtitle: {
+            text: '',
+            x: -20
+        },
+        xAxis: {
+            categories: timestamp
+        },
+        yAxis: {
+            title: {
+                text: 'Temperature (°C)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '°C'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: '{{ user.nickname }}',
+            data: tempext
+        }]
+    });
+
+
+
+
+
+});
+
+    </script>    
+
+
+{% endblock %}
