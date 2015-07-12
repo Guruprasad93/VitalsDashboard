@@ -70,7 +70,7 @@ def index():
     unique_Users = len(set(id_notif))
     size_SOS = len(sos)
     size_notif = len(notifs)
-    return render_template('index.html', sos_Trigger=size_SOS, notif_len = size_notif, user_danger = unique_Users, notifs = notifs, users=users)
+    return render_template('index.html', sos_Trigger=size_SOS, notif_len = size_notif, user_danger = unique_Users, notifs = notifs, users=users, token=0)
     #return "My name is guru"
 
 @app.route("/api/<device_id>/vitals", methods= ['POST'])
@@ -137,7 +137,20 @@ def userVitals(user_id):
     user = User.query.get(user_id)
     vitals = user.vitals.all()
     vitalsJSON = SWJsonify({'vitals':vitals })
-    return  render_template('flot.html', vitalsJSON = json.loads(vitalsJSON), user=user)
+    sos = SOS.query.all()
+    notifs = Notification.query.all()
+    users = User.query.all()
+    notifs = notifs[::-1]
+    id_notif = []
+    for notif in notifs:
+        id_notif.append(notif.user_id)
+        print datetime.datetime.now() - notif.timestamp
+    unique_Users = len(set(id_notif))
+    size_SOS = len(sos)
+    size_notif = len(notifs)
+
+   #return  render_template('flot.html', vitalsJSON = json.loads(vitalsJSON), user=user, token=1)
+    return  render_template('index.html', vitalsJSON = json.loads(vitalsJSON), user=user, sos_Trigger=size_SOS, notif_len = size_notif, user_danger = unique_Users, notifs = notifs, users=users, token=1)
     #return render_template("user-vitals.html", vitalsJSON = json.loads(vitalsJSON),name=user.nickname)
 
 @app.route("/api/sos")
