@@ -60,6 +60,11 @@ def hello():
 @app.route("/index")
 def index():
     sos = SOS.query.all()
+    sos_userid = []
+    for sosObj in sos:
+        sos_userid.append(sosObj.user_id)
+
+    #print sos
     notifs = Notification.query.all()
     users = User.query.all()
     notifs = notifs[::-1]
@@ -70,7 +75,7 @@ def index():
     unique_Users = len(set(id_notif))
     size_SOS = len(sos)
     size_notif = len(notifs)
-    return render_template('index.html', sos_Trigger=size_SOS, sos=sos[0], notif_len = size_notif, user_danger = unique_Users, notifs = notifs, users=users, token=0)
+    return render_template('index.html', sos_Trigger=size_SOS, SOS=sos, SOS_users= list(set(sos_userid)), notif_len = size_notif, user_danger = unique_Users, notifs = notifs[0:7], users=users, token=0)
     #return "My name is guru"
 
 @app.route("/api/<device_id>/vitals", methods= ['POST'])
@@ -142,6 +147,10 @@ def userVitals(user_id):
     users = User.query.all()
     notifs = notifs[::-1]
     id_notif = []
+    sos_userid = []
+    for sosObj in sos:
+        sos_userid.append(sosObj.user_id)
+
     for notif in notifs:
         id_notif.append(notif.user_id)
         print datetime.datetime.now() - notif.timestamp
@@ -150,7 +159,7 @@ def userVitals(user_id):
     size_notif = len(notifs)
 
    #return  render_template('flot.html', vitalsJSON = json.loads(vitalsJSON), user=user, token=1)
-    return  render_template('index.html', vitalsJSON = json.loads(vitalsJSON), user=user, sos_Trigger=size_SOS, notif_len = size_notif, user_danger = unique_Users, notifs = notifs, users=users, token=1)
+    return  render_template('index.html', vitalsJSON = json.loads(vitalsJSON), SOS_users=list(set(sos_userid)), user=user, sos_Trigger=size_SOS, notif_len = size_notif, user_danger = unique_Users, notifs = notifs[0:5], users=users, token=1)
     #return render_template("user-vitals.html", vitalsJSON = json.loads(vitalsJSON),name=user.nickname)
 
 @app.route("/api/sos")
