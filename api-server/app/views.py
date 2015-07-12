@@ -70,7 +70,7 @@ def index():
     unique_Users = len(set(id_notif))
     size_SOS = len(sos)
     size_notif = len(notifs)
-    return render_template('index.html', sos_Trigger=size_SOS, notif_len = size_notif, user_danger = unique_Users, notifs = notifs, users=users, token=0)
+    return render_template('index.html', sos_Trigger=size_SOS, sos=sos[0], notif_len = size_notif, user_danger = unique_Users, notifs = notifs, users=users, token=0)
     #return "My name is guru"
 
 @app.route("/api/<device_id>/vitals", methods= ['POST'])
@@ -182,7 +182,7 @@ def Trial():
         vitals = Vital.query.all()
         sos = SOS.query.all()
         return render_template('flot.html')
-        #return SWJsonify({'vitals':vitals })
+        #return json.loads(SWJsonify({'vitals':vitals }))
 
 if __name__ == '__main__':
     app.debug= True
