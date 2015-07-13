@@ -141,6 +141,7 @@ def usersList():
 def userVitals(user_id):
     user = User.query.get(user_id)
     vitals = user.vitals.all()
+    vitals = vitals[::-1]
     vitalsJSON = SWJsonify({'vitals':vitals })
     sos = SOS.query.all()
     notifs = Notification.query.all()
@@ -159,7 +160,7 @@ def userVitals(user_id):
     size_notif = len(notifs)
 
    #return  render_template('flot.html', vitalsJSON = json.loads(vitalsJSON), user=user, token=1)
-    return  render_template('index.html', vitalsJSON = json.loads(vitalsJSON), SOS_users=list(set(sos_userid)), user=user, sos_Trigger=size_SOS, notif_len = size_notif, user_danger = unique_Users, notifs = notifs[0:5], users=users, token=1)
+    return  render_template('index.html', vitalsJSON = json.loads(vitalsJSON), user_vitals=vitals[0], SOS_users=list(set(sos_userid)), user=user, sos_Trigger=size_SOS, notif_len = size_notif, user_danger = unique_Users, notifs = notifs[0:5], users=users, token=1)
     #return render_template("user-vitals.html", vitalsJSON = json.loads(vitalsJSON),name=user.nickname)
 
 @app.route("/api/sos")
