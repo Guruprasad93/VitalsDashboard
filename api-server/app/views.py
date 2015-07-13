@@ -12,7 +12,7 @@ def send_email(text):
     gmail_user = "pcsvitals@gmail.com"
     gmail_pwd = "slativscp"
     FROM = 'pcsvitals@gmail.com'
-    TO = ['sharvil2009@gmail.com']
+    TO = ['gpr.1993@gmail.com']
     SUBJECT = "Health vital information"
     TEXT = text
 

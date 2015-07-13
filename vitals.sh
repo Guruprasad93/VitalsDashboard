@@ -65,7 +65,7 @@ do
 	
 	ctr=$((ctr+1))
 	echo $ctr
-	if [ $((ctr%10)) -eq 0 ]; then
+	if [ $((ctr%11)) -eq 0 ]; then
 		echo "SOS warning"
 		curl -H "Content-Type: text/plain" -X POST http://127.0.0.1:5000/api/$device_id/SOS -d '{I am in danger}'
 		exit 0
