@@ -8,7 +8,9 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+            
             <div class="row">
+                <div id = "Charts">
                 <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -98,8 +100,11 @@
                 </div>-->
 
             </div>
+        </div>
         </div>   
 
+
+        
 
     <script type="text/javascript">
         $(function () {
@@ -303,4 +308,28 @@
 });
 
     </script>    
+
+
+
+    <!--<script>
+    var auto_refresh = setInterval(
+        //var myDiv
+        function () {
+           $.get('vitals', function(data){
+               AlertCall=$(data).find('#Charts');
+               $('#Charts').html(AlertCall.html());
+
+               //Distresscall=$(data).find('#loadDistressCalls')
+               //$('#loadDistressCalls').html(Distresscall.html())
+               //counter++;
+                //$('#now_playing').html(myDiv.html());
+            })
+
+            //var newcontent = 'Refresh nr:' + counter;
+            //myDiv = $("#loadNowPlaying").html;
+            //$('#now_playing').html(newcontent);
+            //$('#now_playing').html(myDiv);
+            //counter++;
+        }, 1000)
+    </script>-->
 

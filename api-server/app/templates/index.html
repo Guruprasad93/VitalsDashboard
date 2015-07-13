@@ -1,4 +1,5 @@
 {% extends "layoutDash.html" %}
+
 {% block content %}
 
 
@@ -12,7 +13,7 @@
             <!-- /.row -->
             
 
-
+        <div id ="loadDistressCalls">
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="panel panel-primary">
@@ -80,6 +81,8 @@
                         </a>
                     </div>
                 </div>
+            </div>
+        </div>
                 <!--<div class="col-lg-3 col-md-6">
                     <div class="panel panel-red">
                         <div class="panel-heading">
@@ -104,22 +107,48 @@
                 </div>
             </div>-->
             <!-- /.row -->
- 
-            <div class="row">
-                
+            
+        <div class="row">
+            
+        <div id="now_playing">    
                 {% for user in users %}
-
-                <div class="col-lg-2 col-md-6">
              
                    {% if user.id in SOS_users %}
-                       
+
+                 <div class="col-lg-2 col-md-6">      
                     <div class="panel panel-red">
 
+                       <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-medkit fa-2x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{ user.nickname }}</div>
+                                    <div>Health Status!</div>
+
+                                    <!--<div><a href="#"><span class="blink">Alert</span></a> </div>-->
+                                </div>
+                            </div>
+                        </div>
+                        <a href="http://localhost:5000/api/{{ user.id }}/vitals">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+          
                     {% else %}
 
+
+                <div class="col-lg-2 col-md-6">
                     <div class="panel panel-green">
 
-                    {% endif %}
+                    
+
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
@@ -142,9 +171,12 @@
                         </a>
                     </div>
                 </div>
+           
+            {% endif %}
 
+            {% endfor %} 
 
-                {% endfor %} 
+        </div>
 
                 <!--<script type ="text/javascript">
                     $(function() {
@@ -225,7 +257,7 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-5">
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-hover table-striped">
                                             <thead>
@@ -304,7 +336,7 @@
                             <!-- /.row -->
                         </div>
                         <!-- /.panel-body -->
-                    </div>
+                    <!--</div>-->
                     <!-- /.panel -->
                     <!--<div class="panel panel-default">
                         <div class="panel-heading">
@@ -420,7 +452,7 @@
              
                 </div>-->
                 <!-- /.col-lg-8 -->
-                <div class="col-lg-5">
+                <div class="col-lg-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-bell fa-fw"></i> Notifications Panel
@@ -486,15 +518,16 @@
                         </div>
                         
                     </div>
+                </div>
 
-                    <script type="text/javascript">
+                    <!--<script type="text/javascript">
                     var a = 2;
                     console.log(a)
                     setInterval(function(){
                         $('#test').load('index.html');
                     },5000);
 
-                    </script>
+                    </script>-->
 
                     <!-- /.panel -->
                     <!--<div class="panel panel-default">
@@ -635,6 +668,39 @@
 
     </div>
     <!-- /#wrapper -->
+
+    <script>
+    var auto_refresh = setInterval(
+        //var myDiv
+        function () {
+           $.get('/index', function(data){
+               AlertCall=$(data).find('#now_playing');
+               $('#now_playing').html(AlertCall.html());
+
+               Distresscall=$(data).find('#loadDistressCalls')
+               $('#loadDistressCalls').html(Distresscall.html())
+               //counter++;
+                //$('#now_playing').html(myDiv.html());
+            })
+
+            //var newcontent = 'Refresh nr:' + counter;
+            //myDiv = $("#loadNowPlaying").html;
+            //$('#now_playing').html(newcontent);
+            //$('#now_playing').html(myDiv);
+            //counter++;
+        }, 1000)
+    </script>
+
+
+
+
+
+    <!--<script>
+    $(function loadNowPlaying(){
+        $("#now_playing").load("index #now_playing");
+    })
+    setInterval(function(){loadNowPlaying()}, 5000);
+    </script>-->
 
     {% if token == 1 %}
 
