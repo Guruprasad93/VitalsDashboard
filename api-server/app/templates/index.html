@@ -198,11 +198,11 @@
 
 
             <!-- /.row -->
-            <!--<div class="row">
+            <div class="row">
                 <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Area Chart Example
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Firemen Altitude Tracker
                             <div class="pull-right">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -222,18 +222,46 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>-->
+                        </div>
                         <!-- /.panel-heading -->
-                        <!--<div class="panel-body">
-                            <div id="morris-area-chart"></div>
-                        </div>-->
+                        <div class="panel-body">
+                            <div id="chartContainer" style="height: 250px; width: 100;"></div>
+                            <!--<div id="morris-area-chart"></div>-->
+                        </div>
                         <!-- /.panel-body -->
-                   <!-- </div>-->
+                   </div>
+               </div>
+            
+            <div id=NotificationsRefresh>
+                <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bell fa-fw"></i> Notifications Panel
+                            <div id="Test"></div>
+                        </div>
+                        <!-- /.panel-heading -->
 
+                        <div class="panel-body">
+                            <div class="list-group">
+                                
+                                {% for notif in notifs %}
 
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-warning fa-fw"></i> {{ notif.msg }} [{{ users[notif.user_id-1].nickname }}]
+                                    <span class="pull-right text-muted small"><em>{{ notif.timestamp.strftime("%d %m %Y %H:%M:%S")}}</em>
+                                    </span>
+                                </a>
 
-
-
+                                {% endfor %}
+                            
+                            </div>
+                            <!-- /.list-group -->
+                            <!--<a href="#" class="btn btn-default btn-block">View All Alerts</a>-->
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -257,7 +285,7 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-5">
+                                <div class="col-lg-6">
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-hover table-striped">
                                             <thead>
@@ -280,48 +308,7 @@
                                                 </tr>
 
                                                 {% endfor %}
-                                                <!--<tr>
-                                                    <td>3325</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:20 PM</td>
-                                                    <td>$234.34</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3324</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:03 PM</td>
-                                                    <td>$724.17</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3323</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:00 PM</td>
-                                                    <td>$23.71</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3322</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:49 PM</td>
-                                                    <td>$8345.23</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3321</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:23 PM</td>
-                                                    <td>$245.12</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3320</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:15 PM</td>
-                                                    <td>$5663.54</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3319</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:13 PM</td>
-                                                    <td>$943.45</td>
-                                                </tr>-->
+                                       
                                             </tbody>
                                         </table>
                                     </div>
@@ -452,73 +439,12 @@
              
                 </div>-->
                 <!-- /.col-lg-8 -->
-                <div class="col-lg-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bell fa-fw"></i> Notifications Panel
-                            <div id="Test"></div>
-                        </div>
-                        <!-- /.panel-heading -->
 
-                        <div class="panel-body">
-                            <div class="list-group">
-                                
-                                {% for notif in notifs %}
+                <!-- INSERT NOTIFICATION HERE!!-->
 
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-warning fa-fw"></i> {{ notif.msg }} [{{ users[notif.user_id-1].nickname }}]
-                                    <span class="pull-right text-muted small"><em>{{ notif.timestamp.strftime("%d %m %Y %H:%M:%S")}}</em>
-                                    </span>
-                                </a>
 
-                                {% endfor %}
-                                <!--<a href="#" class="list-group-item">
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small"><em>12 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                    <span class="pull-right text-muted small"><em>27 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
-                                    <span class="pull-right text-muted small"><em>43 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small"><em>11:32 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-bolt fa-fw"></i> Server Crashed!
-                                    <span class="pull-right text-muted small"><em>11:13 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-warning fa-fw"></i> Server Not Responding
-                                    <span class="pull-right text-muted small"><em>10:57 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
-                                    <span class="pull-right text-muted small"><em>9:49 AM</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-money fa-fw"></i> Payment Received
-                                    <span class="pull-right text-muted small"><em>Yesterday</em>
-                                    </span>
-                                </a>-->
-                            </div>
-                            <!-- /.list-group -->
-                            <!--<a href="#" class="btn btn-default btn-block">View All Alerts</a>-->
-                        </div>
-                        
-                    </div>
-                </div>
+            </div>
+        </div>
 
                     <!--<script type="text/javascript">
                     var a = 2;
@@ -679,6 +605,10 @@
 
                Distresscall=$(data).find('#loadDistressCalls')
                $('#loadDistressCalls').html(Distresscall.html())
+
+               Notifs=$(data).find('#NotificationsRefresh')
+               $('#NotificationsRefresh').html(Notifs.html())
+
                //counter++;
                 //$('#now_playing').html(myDiv.html());
             })
@@ -701,6 +631,120 @@
     })
     setInterval(function(){loadNowPlaying()}, 5000);
     </script>-->
+<head>
+<script type="text/javascript">
+    window.onload = function () {
+        
+        //initial value of dataPoints 
+        var dps=[];
+        var deltaY = Math.round(Math.random() *(1000));
+        {% for user in users %}
+            dps.push({label: "{{ user.nickname }}", y: Math.round(1000 + Math.random()*100)});
+        {% endfor %}
+        console.log(dps);
+        /*var dps = [
+        {label: "boiler1", y: 206},
+        {label: "boiler2", y: 163},
+        {label: "boiler3", y: 154},
+        {label: "boiler4", y: 176},
+        {label: "boiler5", y: 184},
+        {label: "boiler6", y: 122}
+        ];*/  
+
+        var chart = new CanvasJS.Chart("chartContainer",{           
+            title: {
+                text: "Altitude of Firemen"      
+            },
+            axisY: {                
+                suffix: " C"
+            },      
+            legend :{
+                verticalAlign: 'bottom',
+                horizontalAlign: "center"
+            },
+            data: [
+            {
+                type: "column", 
+                bevelEnabled: true,             
+                indexLabel: "{y} C",
+                dataPoints: dps                 
+            }
+            ]
+        });
+
+        
+        var updateInterval = 1000;  
+        
+
+        var updateChart = function () {
+            i=0;
+            {% for user in users %}
+                var deltaY = Math.round(2 + Math.random() *(-2-2));             
+                var yVal = deltaY + dps[i].y > 0 ? dps[i].y + deltaY : 0;
+                var boilerColor;
+
+                boilerColor =
+                yVal > 200 ? "#FF2500":
+                yVal >= 170 ? "#FF6000":
+                yVal < 170 ? "#6B8E23 ":                            
+                null;
+
+                dps[i] = {label: "{{ user.nickname }}" , y: yVal, color: boilerColor};
+                i++;
+
+            {% endfor %}
+
+            chart.render()
+
+             };
+        
+        updateChart();      
+
+        // update chart after specified interval 
+        setInterval(function(){updateChart()}, updateInterval);
+
+
+    }
+
+            /*for (var i = 0; i < dps.length; i++) {
+                
+              
+                // generating random variation deltaY
+                var deltaY = Math.round(2 + Math.random() *(-2-2));             
+                var yVal = deltaY + dps[i].y > 0 ? dps[i].y + deltaY : 0;
+                var boilerColor;
+
+
+                // color of dataPoint dependent upon y value. 
+
+                boilerColor =
+                yVal > 200 ? "#FF2500":
+                yVal >= 170 ? "#FF6000":
+                yVal < 170 ? "#6B8E23 ":                            
+                null;
+
+
+                // updating the dataPoint
+                dps[i] = {label: "boiler"+(i+1) , y: yVal, color: boilerColor};
+
+            };
+
+            chart.render();
+        };
+        
+        updateChart();      
+
+        // update chart after specified interval 
+        setInterval(function(){updateChart()}, updateInterval);
+
+
+    }*/
+    </script>
+    <script type="text/javascript" src="/static/canvasjs.min.js"></script>
+</head>
+
+
+
 
     {% if token == 1 %}
 

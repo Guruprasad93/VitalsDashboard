@@ -75,7 +75,7 @@ def index():
     unique_Users = len(set(id_notif))
     size_SOS = len(sos)
     size_notif = len(notifs)
-    return render_template('index.html', sos_Trigger=size_SOS, SOS=sos, SOS_users= list(set(sos_userid)), notif_len = size_notif, user_danger = unique_Users, notifs = notifs[0:7], users=users, token=0)
+    return render_template('index.html', sos_Trigger=size_SOS, SOS=sos, SOS_users= list(set(sos_userid)), notif_len = size_notif, user_danger = unique_Users, notifs = notifs[0:6], users=users, token=0)
     #return "My name is guru"
 
 @app.route("/api/<device_id>/vitals", methods= ['POST'])

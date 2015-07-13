@@ -1,5 +1,7 @@
-
-
+<head>
+     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+</head>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -10,7 +12,9 @@
             <!-- /.row -->
             
             <div class="row">
-                <div id = "Charts">
+                <div id = "ChartsRead">
+
+                   
                 <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -315,9 +319,9 @@
     var auto_refresh = setInterval(
         //var myDiv
         function () {
-           $.get('vitals', function(data){
-               AlertCall=$(data).find('#Charts');
-               $('#Charts').html(AlertCall.html());
+           $.get('/api/{{ user.id }}/vitals', function(data){
+               AlertCall=$(data).find('#ChartsRead');
+               $('#ChartsRead').html(AlertCall.html());
 
                //Distresscall=$(data).find('#loadDistressCalls')
                //$('#loadDistressCalls').html(Distresscall.html())
@@ -333,3 +337,4 @@
         }, 1000)
     </script>-->
 
+   
