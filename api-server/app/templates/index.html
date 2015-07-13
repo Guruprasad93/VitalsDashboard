@@ -109,7 +109,9 @@
             <!-- /.row -->
             
         <div class="row">
-            
+          {% set vitals = user.vitals.all() %}
+          {% set vitals = vitals[-1].baro %}  
+          {{ vitals }}
         <div id="now_playing">    
                 {% for user in users %}
              
@@ -639,6 +641,7 @@
         var dps=[];
         var deltaY = Math.round(Math.random() *(1000));
         {% for user in users %}
+
             dps.push({label: "{{ user.nickname }}", y: Math.round(1000 + Math.random()*100)});
         {% endfor %}
         console.log(dps);
